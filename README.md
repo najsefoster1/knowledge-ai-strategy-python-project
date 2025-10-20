@@ -40,6 +40,4 @@ Key AI-linked KPIs and measurement approaches are defined in [`docs/kpi_metrics.
 - `docs/kpi_metrics.md` – KPI definitions and measurement.
 - `.github/` – CI workflow and contribution templates.
 - `tests/` – Unit tests for ingestion.
-
-## License
-MIT License. See [LICENSE](LICENSE) for details.
+ 

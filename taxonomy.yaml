@@ -1,0 +1,51 @@
+taxonomy:
+  domain:
+    - product
+    - customer-support
+    - marketing
+    - engineering
+    - operations
+  subdomain:
+    product:
+      - features
+      - pricing
+      - release-notes
+    customer-support:
+      - troubleshooting
+      - faq
+      - how-to
+    marketing:
+      - positioning
+      - competitive-analysis
+    engineering:
+      - architecture
+      - devops
+      - release-process
+    operations:
+      - policies
+      - procedures
+  audience:
+    - customer
+    - employee
+    - partner
+  format:
+    - article
+    - faq
+    - workflow
+    - training
+    - reference
+  status:
+    - draft
+    - reviewed
+    - published
+    - archived
+metadata:
+  owner:
+    type: string
+    description: "Name or team responsible"
+  last_updated:
+    type: date
+    description: "Last update timestamp (YYYY-MM-DD)"
+  language:
+    type: string
+    description: "Language ISO code (e.g., en, fr)"

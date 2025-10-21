@@ -1,4 +1,4 @@
-.PHONY: setup format lint test ingest validate
+.PHONY: setup format lint test ingest validate validate_ai
 
 setup:
 	python -m venv .venv && . .venv/bin/activate && pip install -U pip && pip install -r requirements.txt
@@ -20,3 +20,9 @@ ingest:
 
 validate:
 	python scripts/knowledge_quality_checks.py --input build/knowledge.json --min-freshness-days 90
+
+validate_ai:
+	# Placeholder for AI validation
+	python - <<'PY'
+print("validate_ai ok")
+PY

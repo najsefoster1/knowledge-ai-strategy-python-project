@@ -23,6 +23,4 @@ validate:
 
 validate_ai:
 	# Placeholder for AI validation
-	python - <<'PY'
-print("validate_ai ok")
-PY
+	python -c "print('validate_ai ok')"		

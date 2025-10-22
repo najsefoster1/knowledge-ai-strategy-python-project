@@ -1,14 +1,14 @@
 .PHONY: setup format lint test ingest validate validate_ai
 
 setup:
-	python -m venv .venv && . .venv/bin/activate && pip install -U pip && pip install -r requirements.txt
+	python -m venv .venv && .venv/bin/activate && pip install -U pip && pip install -r requirements.txt
 
 format:
 	black .
 	isort .
 
 lint:
- -lake8 --max-line-length=120 .
+	flake8 --max-line-length=120 .
 	yamllint .
 	mdformat --check .
 
@@ -23,4 +23,4 @@ validate:
 
 validate_ai:
 	# Placeholder for AI validation
-	python -c "print('validate_ai ok')"		
+	python -c "print('validate_ai ok')"

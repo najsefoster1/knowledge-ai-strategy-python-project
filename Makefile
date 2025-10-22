@@ -8,7 +8,7 @@ format:
 	isort .
 
 lint:
-	flake8flake8 --max-line-length=120 .
+	flake88 --max-line-length=120 .
 	yamllint .
 	mdformat --check .
 

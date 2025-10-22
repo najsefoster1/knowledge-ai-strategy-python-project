@@ -1,6 +1,6 @@
 ![Build](https://github.com/najsefoster1/knowledge-ai-strategy-python-project/actions/workflows/ci.yml/badge.svg)
 
-# Knowledge & AI Strategy - Najse’s working demo
+# Knowledge & AI Strategy - working demo
 
 I wanted something you can skim in minutes and still see how I work. This repo shows how I design a knowledge backbone that is AI ready from day one - clear taxonomy, disciplined governance, and content that is written for both people and retrieval systems.
 

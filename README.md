@@ -1,42 +1,101 @@
-![Build](https://github.com/najsefoster1/knowledge-ai-strategy-python-project/actions/workflows/ci.yml/badge.svg)
+---
+title: "Knowledge & AI Strategy Validator"
+colorFrom: yellow
+colorTo: blue
+sdk: gradio
+sdk_version: "3.33.0"
+app_file: app.py
+pinned: false
+---
 
-# Knowledge & AI Strategy - working demo
+# Knowledge & AI Strategy Validator
 
-I wanted something you can skim in minutes and still see how I work. This repo shows how I design a knowledge backbone that is AI ready from day one - clear taxonomy, disciplined governance, and content that is written for both people and retrieval systems.
+This project delivers a **zero‑friction validator** for turning messy knowledge articles into structured, AI‑ready assets.  
+It supports multiple file formats—Markdown, text, HTML, PDF and DOCX—and automatically enriches each document with metadata, taxonomy validation, staleness checks and PII detection.  
+The goal is to make your content ingestion pipeline **model‑agnostic**, so you can feed any downstream system—from GPT to Claude, Cohere, Llama 2/Mistral, SharePoint AI or Bedrock—without worrying about bad inputs.
 
-## Strategy & Governance
+## ⚙️ Features
 
-The `km_strategy_playbook.md` outlines the vision, roles, taxonomy standards, metadata requirements, and lifecycle phases from create to retire. The `taxonomy.yaml` defines domains, subdomains, audience types, formats, status values, and optional fields for energy and agriculture. Together they demonstrate how I embed governance into daily work and cascade ownership across teams.
+- **Multi‑file, multi‑format uploads**: Drag and drop as many `.md`, `.txt`, `.html`, `.pdf` or `.docx` files as you like. The app parses each document and extracts or infers metadata automatically.
+- **Default taxonomy loaded**: A built‑in `taxonomy_schema.json` defines domains, subdomains, audiences, formats and statuses. You can optionally upload a custom taxonomy, but it’s not required.
+- **Metadata inference & editing**: The app extracts YAML front matter when present and infers missing values (e.g. file name becomes the title). Required fields (`title`, `domain`, `subdomain`, `audience`, `format`, `status`, `last_updated`) are highlighted and exposed as editable dropdowns and a calendar input.  
+  Missing values are flagged and you can update them directly in the interface.
+- **Staleness & PII detection**: Articles older than 365 days are marked as stale. The body text is scanned for SSNs, phone numbers and email addresses. Detected issues are summarized in a bar chart.
+- **Clean output**: After validation you can download a single `.json` for each file, a combined `.zip` of all JSON objects, or an aggregated `.csv` ready for spreadsheets or dashboards.
+- **Intuitive UI**: Built with Gradio Blocks and a dark theme with gold accents. Tooltips explain each field, and a collapsible panel illustrates how this validator fits into the Knowledge‑to‑AI pipeline.
+- **Model‑agnostic pipeline**: Designed to prepare documents for GPT, Claude, Cohere, Llama 2/Mistral, SharePoint AI, Bedrock/SageMaker and any future model.
 
-## AI Readiness & Ingestion
+## 📂 How to Use
 
-The `scripts/knowledge_ingestion.py` and `scripts/knowledge_quality_checks.py` show how to parse Markdown articles with YAML front matter, validate metadata against the taxonomy, export it for retrieval, and enforce freshness and PII risk rules. The `docs/ai/embedding_schema.md` and `docs/ai/retrieval_policy.md` outline how to map metadata into vector embeddings and how to decide what content is public or private.
+1. **Upload documents** – Drag and drop multiple files into the “Knowledge Documents” box or click to select them. Supported formats are `.md`, `.txt`, `.html`, `.pdf` and `.docx`.
+2. **(Optional) Upload a custom taxonomy** – If you have a company‑specific taxonomy, drop a JSON file in the second box. Otherwise, the default taxonomy is loaded automatically.
+3. **Run analysis** – Click **Run Analysis**. The app cleans the content, infers metadata, and validates each document against the taxonomy.
+4. **Review & edit** – The validation table highlights missing or invalid fields. Use the dropdowns and date picker to correct metadata. Click **Apply Edits** to re‑validate.
+5. **Download AI‑ready assets** – Choose JSON or CSV export. You can download individual files or a ZIP containing all JSON outputs.
 
-## Cross Domain Packs
+Annotated screenshots below illustrate the workflow:
 
-I created domain packs for transportation, energy, and agriculture. Each pack contains a playbook, decision guides, articles with YAML front matter, and a screenshots folder. These packs turn raw domain knowledge into decision ready assets with service level agreements and review cadences. They show how to make knowledge useful for customer support, product, engineering, and marketing.
+| Step | Description | Screenshot |
+|-----|-------------|-----------|
+| Upload | The upload section allows you to drag multiple files in at once and optionally provide a custom taxonomy. | *(screenshot of upload section)* |
+| Validate & Edit | After clicking **Run Analysis**, the app displays a table of metadata and issues. Use the dropdowns to select valid values and the calendar to adjust dates. | *(screenshot showing validation results and editable metadata)* |
+| Export | Once everything looks good, export your dataset as JSON or CSV. | *(screenshot of export options)* |
 
-## Change Leadership
+> **Friendly messages guide you through the process** — if a document is missing an audience tag you’ll see “Audience tag missing—select one (Internal, Customer, Partner)” and if it contains an email address you’ll be prompted to verify.
 
-This README includes rollout steps, user stories, and adoption practices. It explains why knowledge capture matters, how to author AI ready articles, and how to build a community of practice. I wrote it in my own voice to make it approachable and human.
+## 🧐 Why It Matters
 
-## Measurement & KPIs
+Modern AI applications depend on clean, well‑structured knowledge. Feeding unvalidated data into a large language model can lead to hallucinations, compliance issues and frustrated users. This validator serves as the first step in the **Knowledge‑to‑AI pipeline**, ensuring:
 
-The `docs/measurement/telemetry_spec.md`, synthetic events script, and KPI queries define and instrument AI linked metrics: ticket deflection percentage, AI agent resolution percentage, search success rate, onboarding time to value, and article freshness. These metrics help track the impact of knowledge management and AI across the customer lifecycle.
+* **Consistency** – Metadata fields follow a controlled vocabulary and conform to your taxonomy.
+* **Freshness** – Stale content is flagged so you can prioritize updates.
+* **Safety** – Sensitive information like SSNs and emails are caught early.
+* **Interoperability** – The output format works with GPT, Claude, Cohere, Llama 2/Mistral, SharePoint AI and Bedrock/SageMaker.
 
-## Governance Trail & Housekeeping
+By establishing trust in your knowledge base up front, your downstream AI (chatbots, search, summarization engines) delivers more accurate and reliable answers.
 
-A separate `github-housekeeping` repository will log renames, actions, errors, and rollback notes. It supports disciplined change control and makes it easy to see who did what and why.
+## 💪 Local Development
 
-## Getting Started
+Clone the repository and install dependencies in a virtual environment:
 
-To run the ingestion and validation pipelines locally:
-
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
 ```
-make setup
-make ingest
-make validate
-make validate_ai
+
+Run the app locally:
+
+```bash
+python app.py
 ```
 
-To explore the domain packs, navigate into `docs/packs/transportation`, `docs/packs/energy`, or `docs/packs/agriculture` and read the playbooks and articles. For more details about governance, taxonomy, AI readiness, or measurement, open the documents in the `docs` folder. I look forward to discussing how this approach can help your organization build an AI ready knowledge foundation.
+Open `http://localhost:7860` in your browser. You can customize the default taxonomy in `taxonomy_schema.json`.
+
+## 🚀 Live Demo
+
+Try the live Hugging Face Space here: [najsefoster/Knowledge‑ai‑strategy](https://huggingface.co/spaces/najsefoster/Knowledge-ai-strategy)  
+This version is continuously deployed from the `main` branch and reflects the latest features.
+
+## 💾 Repository Contents
+
+```text
+knowledge_ai_strategy_space/
+├── app.py                  # Gradio app source code
+├── requirements.txt        # Python dependencies
+├── taxonomy_schema.json    # Default taxonomy definition
+├── README.md               # Project overview and instructions
+└── sample_data/            # Sample documents for demonstration
+    ├── article_demo.md
+    ├── article_example.pdf
+    └── article_example.docx
+```
+
+## 📚 Coursework & Background
+
+This project is part of my ongoing exploration of **knowledge management**, **AI strategy**, and **customer engagement**. I recently completed a **Master of Science in Information Systems & Business Analytics** at Park University (2025), with coursework in **Business Intelligence**, **Data Visualization**, **Machine Learning**, **SQL**, **Advanced Excel**, **Python Programming**, **IT Governance** and **Decision Science**.  
+This builds on my experience designing knowledge backbones for the U.S. Air Force and driving AI initiatives in the private sector. I thrive in fast‑paced environments and love turning ambiguous challenges into scalable solutions.
+
+---
+
+*©2025 Najse Foster — Knowledge & AI Strategy Ingestion Validator*

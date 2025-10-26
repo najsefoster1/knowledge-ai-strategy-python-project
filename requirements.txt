@@ -1,9 +1,5 @@
-python-frontmatter==1.0.0
-PyYAML==6.0.2
-pydantic==2.9.2
-black==24.8.0
-flake8==7.1.1
-isort==5.13.2
-pytest==8.3.2
-mdformat==0.7.17
-yamllint==1.35.1
+gradio>=4.0.0
+PyYAML>=6.0
+pdfplumber>=0.7.0
+python-docx>=1.0.0
+matplotlib>=3.7

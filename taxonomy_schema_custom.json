@@ -1,0 +1,42 @@
+{
+  "domain": [
+    "customer-engagement",
+    "ai-strategy",
+    "security"
+  ],
+  "subdomain": {
+    "customer-engagement": [
+      "analytics",
+      "personalization",
+      "loyalty",
+      "zero-trust"
+    ],
+    "ai-strategy": [
+      "prompt-engineering",
+      "retrieval-augmented",
+      "embedding-models"
+    ],
+    "security": [
+      "zero-trust",
+      "encryption",
+      "compliance"
+    ]
+  },
+  "audience": [
+    "executive",
+    "manager",
+    "technical"
+  ],
+  "format": [
+    "whitepaper",
+    "playbook",
+    "faq",
+    "guide"
+  ],
+  "status": [
+    "draft",
+    "reviewed",
+    "published",
+    "deprecated"
+  ]
+}

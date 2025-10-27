@@ -181,15 +181,25 @@ def validate_article(meta: dict, body: str, taxonomy: dict, stale_days: int = 36
                 )
         except ValueError:
             issues.append("Invalid last_updated date format (use YYYY-MM-DD)")
-    # PII heuristics in body
+  
+
+
+ # PII heuristics in body
     import re
+    # SSN detection
     if re.search(r"\b\d{3}-\d{2}-\d{4}\b", body):
-        issues.append("Possible SSN-like pattern detected in body")
+                issues.append("Possible SSN-likelike pattern detected in body")
+    # Email detection
     if re.search(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", body):
         issues.append("Email addresses detected in body (verify necessity)")
+    # Phone number detection (US formats)
+    if re.search(r"(?:\+?1[-.\s]?)?(?:\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}\b", body):
+        issues.append("Possible phone number detected in body")
+
     return issues
 
-
+  
+    
 def process_files(files: List[bytes], taxonomy_file: bytes | None) -> Tuple[str, List[dict]]:
     """Process uploaded files and return JSON string and table data.
 
